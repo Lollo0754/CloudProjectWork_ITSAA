@@ -1,7 +1,7 @@
 version: "3.8"
 
-# Usare con: docker compose -f docker-compose.prod.yml up -d
-# Il DB è su AWS RDS, configurare DATABASE_URL nel file .env
+# Avvio: docker compose -f docker-compose.prod.yml up -d --build
+# Richiede un file .env nella stessa cartella con DATABASE_URL e SECRET_KEY
 
 services:
   backend:
