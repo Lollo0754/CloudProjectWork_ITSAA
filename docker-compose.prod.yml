@@ -1,0 +1,22 @@
+version: "3.8"
+
+# Usare con: docker compose -f docker-compose.prod.yml up -d
+# Il DB è su AWS RDS, configurare DATABASE_URL nel file .env
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    restart: always
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always

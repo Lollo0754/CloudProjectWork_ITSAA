@@ -1,0 +1,42 @@
+[
+  {
+    "mese": "Ottobre 2025",
+    "materie": ["Fondamenti programmazione", "Gestione processo formativo", "Soft Skills"],
+    "tecnologie": ["Python", "Git & GitHub"]
+  },
+  {
+    "mese": "Novembre 2025",
+    "materie": ["Fondamenti programmazione", "Inglese tecnico", "Networking", "Sicurezza"],
+    "tecnologie": ["Python", "Technical Documentation", "Cisco Packet Tracer"]
+  },
+  {
+    "mese": "Dicembre 2025",
+    "materie": ["Fondamenti programmazione", "Inglese tecnico", "Networking", "Sicurezza", "Sviluppo distribuito", "Windows OS"],
+    "tecnologie": ["Python scripting", "AWS", "Cisco Packet Tracer", "Docker"]
+  },
+  {
+    "mese": "Gennaio 2026",
+    "materie": ["Database", "Linguaggi web", "Python", "Soft Skills", "Sviluppo distribuito", "Windows OS"],
+    "tecnologie": ["PostgreSQL", "HTML / CSS / JavaScript", "GitHub Pages", "Docker Compose", "Active Directory"]
+  },
+  {
+    "mese": "Febbraio 2026",
+    "materie": ["Cloud Services", "Database", "Informatica giuridica", "Inglese tecnico", "Linux OS", "Python", "Sistemi di virtualizzazione"],
+    "tecnologie": ["AWS", "GDPR compliance", "Bash scripting", "VirtualBox"]
+  },
+  {
+    "mese": "Marzo 2026",
+    "materie": ["Architettura IT", "Database", "Inglese tecnico", "Linux OS", "Project Work", "Python", "Security fundamentals"],
+    "tecnologie": ["AWS", "Technical Writing", "systemd & Linux services", "GitHub"]
+  },
+  {
+    "mese": "Aprile 2026",
+    "materie": ["Architettura IT", "Cloud Services", "Powershell/Bash", "Project Work", "Python", "Storage"],
+    "tecnologie": ["AWS", "Bash scripting", "OWASP Top 10"]
+  },
+  {
+    "mese": "Maggio 2026",
+    "materie": ["Cloud Services", "Powershell/Bash", "Project Work", "Python"],
+    "tecnologie": ["AWS", "Bash deploy script", "Docker Compose"]
+  }
+]
