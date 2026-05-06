@@ -1,0 +1,220 @@
+═══════════════════════════════════════════════════════════════
+  CLOUD AWS PROJECT — COPIONE PRESENTAZIONE
+  Lorenzo De Nardi · ITS/ITSAA · 2025/2026
+  Durata stimata: 10-15 minuti
+═══════════════════════════════════════════════════════════════
+
+──────────────────────────────────────────────────────────────
+SLIDE 1 — TITOLO
+──────────────────────────────────────────────────────────────
+"Buongiorno a tutti. Il mio progetto si chiama Cloud AWS Project
+e consiste nella realizzazione di un portale web completo,
+accessibile da internet, scalabile e sicuro, costruito interamente
+su Amazon Web Services.
+
+Ve lo presento partendo dall'obiettivo, passando per l'architettura
+e i servizi AWS utilizzati, fino ad arrivare alle due funzionalità
+principali dell'applicazione."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 2 — OBIETTIVO
+──────────────────────────────────────────────────────────────
+"L'obiettivo del progetto era creare un portale web protetto da login,
+accessibile da internet, che espone due servizi principali.
+
+Il primo è la Storia del Corso: una timeline interattiva che racconta
+il percorso formativo mese per mese.
+
+Il secondo è la Gestione Emergenze: un sistema real-time per creare
+e monitorare segnalazioni di emergenza.
+
+Il focus era su scalabilità — cioè la capacità di gestire picchi di
+traffico — e su sicurezza, utilizzando il maggior numero possibile
+di servizi AWS."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 3 — ARCHITETTURA CLOUD
+──────────────────────────────────────────────────────────────
+"Questa è l'architettura dell'applicazione.
+
+Il traffico arriva da internet e viene ricevuto dall'Application Load
+Balancer, che lo distribuisce tra le istanze EC2 gestite dall'Auto
+Scaling Group. Le istanze a loro volta comunicano con il database
+PostgreSQL su AWS RDS.
+
+Ma ci sono altri due servizi integrati: le istanze leggono le
+credenziali del database — in modo sicuro — da AWS Secrets Manager,
+e caricano il file della timeline da Amazon S3.
+
+Questa separazione garantisce che nessuna credenziale sia mai
+scritta nel codice o su disco."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 4 — STACK TECNOLOGICO
+──────────────────────────────────────────────────────────────
+"Per lo stack tecnologico ho scelto React con Vite e Bootstrap 5
+per il frontend, che garantisce un'interfaccia moderna e responsive.
+
+Il backend è scritto in Python con FastAPI, che gestisce le API REST
+e i WebSocket per gli aggiornamenti in tempo reale.
+
+Il database è PostgreSQL su AWS RDS, e tutta l'applicazione è
+containerizzata con Docker e Docker Compose, sia per lo sviluppo
+locale che per la produzione."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 5 — SERVIZI AWS
+──────────────────────────────────────────────────────────────
+"Ho utilizzato sei servizi AWS.
+
+EC2 ospita i container Docker dell'applicazione.
+
+L'Application Load Balancer è il punto di ingresso pubblico:
+distribuisce le richieste tra le istanze e nasconde le EC2 da internet.
+
+L'Auto Scaling Group scala automaticamente da 1 a 3 istanze quando
+la CPU supera il 70%.
+
+RDS gestisce il database PostgreSQL in modo completamente gestito.
+
+S3 archivia il file timeline.json, che può essere aggiornato
+direttamente dal browser AWS senza toccare il codice.
+
+E infine Secrets Manager protegge le credenziali del database
+e la chiave JWT."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 6 — SICUREZZA
+──────────────────────────────────────────────────────────────
+"La sicurezza è stata un aspetto centrale del progetto.
+
+Ho creato tre Security Group separati: uno per il Load Balancer,
+uno per le EC2 e uno per il database. In questo modo le istanze
+EC2 non sono mai direttamente raggiungibili da internet, e il
+database accetta connessioni solo dalle EC2.
+
+Le credenziali non sono mai su disco: vengono lette da Secrets
+Manager all'avvio del backend.
+
+Ogni chiamata API richiede un token JWT valido, e le password
+degli utenti sono hashate con bcrypt prima di essere salvate."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 7 — LOGIN E HOMEPAGE
+──────────────────────────────────────────────────────────────
+"L'accesso al portale avviene tramite login con username e password.
+Il backend restituisce un token JWT che viene salvato nel browser
+e allegato automaticamente a ogni chiamata API successiva.
+
+Se il token scade, l'utente viene reindirizzato al login automaticamente.
+
+La homepage è ispirata a Google Classroom: due tile grandi al centro
+della pagina, una per ogni servizio. Cliccando sulla tile delle
+Emergenze appaiono due pulsanti: Operatore e Centrale Operativa."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 8 — STORIA DEL CORSO
+──────────────────────────────────────────────────────────────
+"Il primo servizio è la Storia del Corso.
+
+È una linea del tempo verticale con un nodo per ogni mese,
+da ottobre 2025 a maggio 2026.
+
+Passando il mouse su un nodo, la card si espande e mostra
+le materie studiate quel mese e le tecnologie utilizzate,
+con badge colorati: blu per le materie, verde per le tecnologie.
+
+I dati vengono caricati direttamente da un file JSON su Amazon S3,
+quindi posso aggiornare il contenuto della timeline senza fare
+nessun redeploy dell'applicazione."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 9 — GESTIONE EMERGENZE: OPERATORE
+──────────────────────────────────────────────────────────────
+"Il secondo servizio è la Gestione Emergenze.
+
+La vista operatore è ottimizzata per il mobile. L'operatore può
+creare una nuova segnalazione compilando: il tipo di emergenza,
+una descrizione, e la posizione.
+
+Per la posizione ho integrato due modalità: il pulsante GPS che
+legge le coordinate reali del dispositivo, oppure un click diretto
+sulla mappa Leaflet — basata su OpenStreetMap — per posizionare
+il punto manualmente.
+
+Le segnalazioni possono essere in quattro stati: Aperta,
+In carico, Annullata e Chiusa."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 10 — GESTIONE EMERGENZE: CENTRALE OPERATIVA
+──────────────────────────────────────────────────────────────
+"La vista della Centrale Operativa è pensata per il PC.
+
+In alto ci sono quattro statistiche in tempo reale: il numero di
+segnalazioni aperte, in carico, chiuse, e la durata media da
+apertura a chiusura.
+
+Al centro c'è la mappa Leaflet con punti colorati: rosso per le
+segnalazioni aperte, blu per quelle in carico.
+
+A destra la lista di tutte le segnalazioni, con quattro bottoni
+per cambiare lo stato direttamente. La pagina si aggiorna in
+automatico grazie ai WebSocket: quando un operatore crea una
+nuova segnalazione, la mappa e le statistiche si aggiornano
+senza bisogno di ricaricare la pagina."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 11 — SCALABILITÀ
+──────────────────────────────────────────────────────────────
+"Per testare la scalabilità ho utilizzato Locust, che simula
+centinaia di utenti concorrenti che fanno chiamate alle API.
+
+L'Auto Scaling Group è configurato con minimo 1 istanza,
+massimo 3. Quando il consumo di CPU supera il 70%, AWS lancia
+automaticamente una nuova istanza.
+
+Le nuove istanze partono dall'AMI preconfigurata, che contiene
+già Docker e il codice dell'applicazione. All'avvio eseguono
+automaticamente git pull e docker compose up, e sono operative
+in circa tre minuti senza nessun intervento manuale."
+
+
+──────────────────────────────────────────────────────────────
+SLIDE 12 — CONCLUSIONI
+──────────────────────────────────────────────────────────────
+"Per concludere, questo progetto dimostra come sia possibile
+costruire un'applicazione web completa e production-ready
+su AWS combinando diversi servizi.
+
+L'applicazione è completamente containerizzata, il deploy
+è automatico, la sicurezza è gestita a livello infrastrutturale,
+e il sistema è in grado di scalare automaticamente sotto carico.
+
+Ho trovato particolarmente interessante l'integrazione di
+Secrets Manager e S3, che permettono di gestire configurazione
+e credenziali in modo sicuro e flessibile, senza modificare
+il codice dell'applicazione.
+
+Grazie per l'attenzione, sono disponibile per domande."
+
+
+──────────────────────────────────────────────────────────────
+NOTE PER LA PRESENTAZIONE
+──────────────────────────────────────────────────────────────
+- Tempo per slide: circa 1-1.5 minuti
+- Mostra il sito live durante le slide 7-10 se possibile
+- Per la demo dell'auto scaling: avvia Locust prima della presentazione
+  con 30 utenti e mostra AWS Console > EC2 > Auto Scaling Groups
+- Se ti chiedono del costo AWS: t3.small = ~0.02$/h, RDS db.t3.micro = ~0.02$/h
+- Se ti chiedono perché non HTTPS: richiederebbe un dominio registrato
+═══════════════════════════════════════════════════════════════
